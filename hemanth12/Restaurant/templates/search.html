@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:400,700|Merriweather:400,700&display=swap"
+          rel="stylesheet">
+
+    {% if title %}
+
+    <link href="{{ url_for('static', filename='search.css')}}"
+          type="text/css"
+          rel="stylesheet">
+
+    <title>
+        Restaurants Spotter - {{ title }}
+    </title>
+
+    {% else %}
+
+    <link href="{{ url_for('static', filename='home.css')}}"
+          type="text/css"
+          rel="stylesheet">
+
+    <title>
+        Restaurants Spotter
+    </title>
+
+    {% endif %}
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="text-center navbar navbar-expand-md navbar-dark bg-custom">
+
+        <a class="navbar-brand"
+           href="{{ url_for('home') }}">
+
+            <span class="r-name">
+                Restaurants Spotter
+            </span>
+
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+    </nav>
+
+    <!-- Search Form -->
+
+    <div class="container form-container">
+
+        <form action="{{ url_for('search') }}"
+              method="POST">
+
+            <div class="row">
+
+                <!-- Guests -->
+                <div class="col-12 col-md-2">
+                    <div class="form-group">
+                        <input type="number"
+                               class="form-control"
+                               min="1"
+                               id="people"
+                               name="people"
+                               placeholder="Guests"
+                               required>
+                    </div>
+                </div>
+
+                <!-- Min Budget -->
+                <div class="col-6 col-md-2">
+                    <div class="form-group">
+                        <input type="number"
+                               class="form-control"
+                               name="min_Price"
+                               placeholder="Min Budget"
+                               required>
+                    </div>
+                </div>
+
+                <!-- Max Budget -->
+                <div class="col-6 col-md-2">
+                    <div class="form-group">
+                        <input type="number"
+                               class="form-control"
+                               name="max_Price"
+                               placeholder="Max Budget"
+                               required>
+                    </div>
+                </div>
+
+                <!-- Cuisine -->
+                <div class="col-12 col-md-3">
+                    <div class="form-group">
+                        <select class="custom-select"
+                                id="cuisine"
+                                name="cuisine"
+                                required>
+
+                            <option value="" selected disabled>
+                                Select Cuisine
+                            </option>
+
+                            <option value="Biryani">Biryani</option>
+                            <option value="Andhra">Andhra</option>
+                            <option value="South Indian">South Indian</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Multi-cuisine">Multi-cuisine</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Locality -->
+                <div class="col-12 col-md-3">
+                    <div class="form-group">
+                        <select class="custom-select"
+                                id="locality"
+                                name="locality"
+                                required>
+
+                            <option value="" selected disabled>
+                                Select Locality
+                            </option>
+
+                            <option value="Gajuwaka">Gajuwaka</option>
+                            <option value="Siripuram">Siripuram</option>
+                            <option value="Madhurawada">Madhurawada</option>
+                            <option value="MVP Colony">MVP Colony</option>
+                            <option value="Asilmetta">Asilmetta</option>
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Submit Button -->
+
+            <div class="row text-center">
+                <div class="col-12">
+                    <button class="submit-button">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/34/34568.png"
+                             width="25px"
+                             height="20px"
+                             class="mr-2">
+
+                        Get Restaurants
+
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Restaurant Results -->
+
+    <div class="container restaurant-container">
+
+        <ul class="list-unstyled">
+
+            {% if restaurants | length > 0 %}
+
+                {% for res in restaurants %}
+
+                <li class="media mt-2 res-card">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
+                         width="60px"
+                         height="60px"
+                         class="mr-3"
+                         alt="restaurant">
+
+                    <div class="media-body">
+
+                        <h5 class="mt-0">
+                            {{ res['name'] }}
+                        </h5>
+
+                        <p>
+                            Rating:
+                            <span class="badge badge-success d-inline">
+                                {{ res['aggregate_rating'] }}
+                            </span>
+                        </p>
+
+                        <div class="res-content">
+
+                            <p class="text-muted">
+                                {{ res['address'] }}
+                            </p>
+
+                            <p>
+                                <span class="timing">
+                                    Timing:
+                                    {{ res['timings'] }}
+                                </span>
+                            </p>
+
+                            <!-- NEW FEATURE -->
+                            <p>
+                                <b>Recommended Food:</b>
+                                {{ res['recommended_food'] }}
+                            </p>
+
+                            <!-- Google Maps Button -->
+                            <button class="more-info">
+
+                                <a href="{{ res['url'] }}"
+                                   target="_blank"
+                                   style="color:white; text-decoration:none;">
+
+                                    More Info
+
+                                </a>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+                {% endfor %}
+
+            {% else %}
+
+                <li class="mt-2">
+
+                    <div class="text-center align-middle"
+                         style="color: white;">
+
+                        <h5>
+                            Sorry, No Result Found :(
+                        </h5>
+
+                        <p>
+                            Try again
+                        </p>
+
+                    </div>
+
+                </li>
+
+            {% endif %}
+
+        </ul>
+
+    </div>
+
+    <!-- JavaScript -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

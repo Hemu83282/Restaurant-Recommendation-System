@@ -1,0 +1,292 @@
+/* ======================================
+   GOOGLE FONT
+====================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ======================================
+   GLOBAL
+====================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:url("bg.jpg") center center/cover no-repeat fixed;
+    min-height:100vh;
+    color:white;
+    position:relative;
+}
+
+/* Dark Overlay */
+
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.75);
+    z-index:-1;
+}
+
+/* ======================================
+   NAVBAR
+====================================== */
+
+.navbar{
+    background:#111 !important;
+    padding:15px;
+}
+
+.navbar-brand{
+    color:#ffb547 !important;
+    font-size:28px;
+    font-weight:700;
+}
+
+/* ======================================
+   SEARCH BOX
+====================================== */
+
+.search-box{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:40px;
+}
+
+/* ======================================
+   INPUTS
+====================================== */
+
+.form-control,
+.form-select{
+    height:50px;
+    border-radius:10px;
+    border:1px solid #444;
+    background:#222;
+    color:#fff;
+}
+
+.form-control::placeholder{
+    color:#bbb;
+}
+
+.form-control:focus,
+.form-select:focus{
+    background:#222;
+    color:#fff;
+    border-color:#ffb547;
+    box-shadow:none;
+}
+
+option{
+    background:#222;
+    color:#fff;
+}
+
+/* ======================================
+   BUTTON
+====================================== */
+
+.btn-warning{
+    background:#ffb547;
+    color:#111 !important;
+    border:none;
+    font-weight:600;
+    border-radius:30px;
+    padding:10px 25px;
+    transition:.3s;
+}
+
+.btn-warning:hover{
+    background:#ffc867;
+    color:#000 !important;
+    transform:translateY(-2px);
+}
+
+/* ======================================
+   RESTAURANT CARD
+====================================== */
+
+.restaurant-card{
+    background:rgba(255,255,255,.96);
+    color:#222;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.30);
+    transition:.3s;
+    height:100%;
+}
+
+.restaurant-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 35px rgba(0,0,0,.45);
+}
+
+/* ======================================
+   IMAGE
+====================================== */
+
+.restaurant-img{
+    width:80px;
+    height:80px;
+    border-radius:15px;
+    object-fit:cover;
+}
+
+/* ======================================
+   TITLE
+====================================== */
+
+.restaurant-card h4{
+    color:#111;
+    margin-bottom:10px;
+    font-weight:700;
+}
+
+/* ======================================
+   BADGE
+====================================== */
+
+.badge{
+    font-size:14px;
+    padding:8px 12px;
+}
+
+/* ======================================
+   TEXT COLORS
+====================================== */
+
+.restaurant-card p{
+    color:#222 !important;
+    margin-bottom:12px;
+    line-height:1.6;
+    font-size:15px;
+}
+
+.restaurant-card b{
+    color:#111 !important;
+}
+
+.restaurant-card strong{
+    color:#111 !important;
+}
+
+.restaurant-card span{
+    color:#222 !important;
+}
+
+/* Fix Bootstrap muted text */
+
+.restaurant-card .text-muted{
+    color:#444 !important;
+}
+
+/* Address */
+
+.restaurant-card .address{
+    color:#222 !important;
+    font-weight:500;
+}
+
+/* Timing */
+
+.restaurant-card .timing{
+    color:#222 !important;
+    font-weight:500;
+}
+
+/* Recommended Food */
+
+.restaurant-card p:last-of-type{
+    color:#222 !important;
+    font-weight:500;
+}
+
+/* Icons */
+
+.restaurant-card i{
+    width:22px;
+    color:#f5a623;
+}
+
+/* Links */
+
+.restaurant-card a{
+    color:#111 !important;
+    text-decoration:none;
+}
+
+.restaurant-card a:hover{
+    color:#000 !important;
+}
+
+/* Google Maps Button */
+
+.restaurant-card .btn-warning{
+    background:#f5a623;
+    color:#111 !important;
+    border:none;
+    font-weight:600;
+}
+
+.restaurant-card .btn-warning:hover{
+    background:#ffbf3f;
+    color:#000 !important;
+}
+
+/* ======================================
+   FOOTER
+====================================== */
+
+footer{
+    margin-top:40px;
+    padding:20px;
+    background:#111;
+    color:#bbb;
+}
+
+/* ======================================
+   RESPONSIVE
+====================================== */
+
+@media(max-width:992px){
+
+    .search-box{
+        padding:20px;
+    }
+
+    .restaurant-card{
+        margin-bottom:25px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .restaurant-card{
+        text-align:center;
+    }
+
+    .restaurant-img{
+        display:block;
+        margin:auto auto 20px;
+    }
+
+    .restaurant-card h4{
+        font-size:22px;
+    }
+
+    .btn-warning{
+        width:100%;
+    }
+
+}
